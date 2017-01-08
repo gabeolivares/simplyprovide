@@ -1,0 +1,169 @@
+<!-- Sidebar -->
+  <section id="sidebar">
+    <div class="inner">
+      <nav>
+        <ul>
+          <li><a href="#intro">Home</a></li>
+          <li style="color:#000"><a href="#create">Create Jobs</a></li>
+          <!-- <li><a href="#search">Search Jobs</a></li> -->
+          <li><a href="#movie-list">Jobs List</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+<!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Intro -->
+      <section id="intro" class="wrapper style1 fullscreen fade-up">
+        <div class="inner">
+          <h1 class="title">Simply Provide</h1>
+          <p>What you need
+           made simple for you<br />
+           Provided by experts</p>
+          <ul class="actions">
+            <li><a href="#create" class="button scrolly">Get Started</a></li>
+          </ul>
+        </div>
+      </section>
+
+    <!-- Create -->
+      <section id="create" class="wrapper style2 spotlights">
+        <section>
+          <div class="content">
+            <div class="inner">
+              <h2 style="color:#000">Create a Job</h2>
+              <p style="color:#000">
+                Please enter information about your job in the form below and press 'Create Job'.
+                Once your Job is created we will process and email you with updates.
+              </p>
+              <form onsubmit="createJob();;return false;" id="create-job-form">
+                <div class="field half first">
+                  <label for="first-name">First Name</label>
+                  <input type="text" name="first-name" id="first-name" required />
+                </div>
+                <div class="field half">
+                  <label for="last-name">Last Name</label>
+                  <input type="text" name="last-name" id="last-name" required />
+                </div>
+                <div class="field half first">
+                  <label for="email">Email</label>
+                  <input type="text" name="email" id="email" required />
+                </div>
+                <div class="field half">
+                  <label for="job-type">Job Type</label>
+                  <input type="text" name="job-type" id="job-type" required />
+                </div>
+                <div class="field half first">
+                  <label for="desc">Description</label>
+                  <input type="text" name="desc" id="desc" required />
+                </div>
+                <div class="field half">
+                  <label for="desired-timeline">Desired Timeline</label>
+                  <input type="text" name="desired-timeline" id="desired-timeline" required />
+                </div>
+                <div class="field half first">
+                  <label for="price">Price</label>
+                  <input type="text" name="price" id="price" required />
+                </div>
+                <div class="field half">
+                  <!-- <label for="photo">Photo</label>
+                  <input type="text" name="photo" id="photo" required /> -->
+                </div>
+                <ul class="actions field half submit-create">
+                  <button type="submit"  class="button submit" required> Create Job</button>
+                </ul>
+              </form>
+              <div id="create-empty-msg" class='error-msg' style="display:none;">
+                Please make sure all the fields are completeled.
+              </div>
+              <div id="create-error-msg" class='error-msg' style="display:none;">
+                Unable to create job.
+              </div>
+              <div id="create-success">
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+    <!-- search -->
+      <!-- <section id="search" class="wrapper style3 fade-up">
+        <div class="inner">
+          <h2>Search for a Movie</h2>
+          <p>Start typing in a movie name to search.</p>
+          <form onsubmit="searchMovies();;return false;" id="search-movie-form">
+              <label for="search">Search</label>
+              <input type="text" name="search" id="movie-search" required>
+              <label for="search-params">Search By:</label>
+              <select name="search-params" id="movie-search-param" required>
+                <option value="title">Title</option>
+                <option value="actors">Actors</option>
+                <option value="genre">Genre</option>
+                <option value="year">Year</option>
+                <option value="rating">Rating</option>
+              </select>
+            <ul class="actions">
+              <button type="submit"  class="button submit"> Search Movie</button>
+            </ul>
+          </form>
+          <div id="search-error-msg" class='error-msg' style="display:none;">
+            Unable to search for a movie.
+          </div>
+          <div id="search-success">
+          </div>
+        </div>
+      </section> -->
+
+    <!-- movie-list -->
+      <section id="movie-list" class="wrapper style1 fade-up">
+        <div class="inner">
+          <h2>Movie List</h2>
+          <p>See all your jobs below. You can edit or remove jobs from your job list.</p>
+          <div class="style1" style="height:600px;overflow-y:auto;">
+            <section>
+              <table id="movie-list-table" class="table">
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Job Type</th>
+                    <th>Description</th>
+                    <th>Timeline</th>
+                    <th>Price</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @job.each do |j| %>
+                        <tr id="row-<%= j.id %>">
+                          <td id="first-name-<%= j.id %>"><%= j.first_name %></td>
+                          <td id="last-name-<%= j.id %>"><%= j.last_name %></td>
+                          <td id="email-<%= j.id %>"><%= j.email %></td>
+                          <td id="job-type-<%= j.id %>"><%= j.job_type %></td>
+                          <td id="description-<%= j.id %>"><%= j.description %></td>
+                          <td id="timeline-<%= j.id %>"><%= j.timeline %></td>
+                          <td id="price-<%= j.id %>"><%= j.price %></td>
+                          <td>
+														<button type="button" onclick="destroyMovie(<%= j.id %>);" class="btn btn-danger">Delete</button>
+														<div id="delete-error-msg-<%= j.id %>" class='error-msg' style="display:none;">
+															Could not delete job.
+														</div>
+													</td>
+                        </tr>
+                     <% end %>
+                </tbody>
+             </table>
+            </section>
+          </div>
+        </div>
+      </section>
+<!-- Footer -->
+  <footer id="footer" class="wrapper style1-alt">
+    <div class="inner">
+      <ul class="menu">
+      </ul>
+    </div>
+  </footer>
